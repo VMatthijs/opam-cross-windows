@@ -19,16 +19,13 @@ build: [
   ["env" "OCAMLFIND_TOOLCHAIN=windows"
    "ocamlbuild" "-classic-display" "-use-ocamlfind" "src/ppx_deriving_runtime.cmxs" "src/ppx_deriving_runtime.cma"]
 ]
-build-test: [
+[
   "ocamlbuild" "-classic-display" "-use-ocamlfind" "src_test/test_ppx_deriving.byte" "--"
-]
-build-doc: [
+] {with-test}
+[
   make "doc"
-]
-install: [
-  "env" "OCAMLFIND_TOOLCHAIN=windows"
-  make "install"
-]
+] {with-doc}
+install: [["env" "OCAMLFIND_TOOLCHAIN=windows" make "install" "EXE="]]
 depends: [
   "ocamlbuild" {build}
   "ocamlfind"  {build & >= "1.6.0"}
@@ -40,7 +37,7 @@ depends: [
   "ppx_tools-windows"  {>= "4.02.3"}
   "result"
   "result-windows"
-  "ounit"      {test}
+  "ounit"      {with-test}
   "ocaml-windows"
 ]
 available: opam-version >= "1.2"
