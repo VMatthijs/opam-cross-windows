@@ -9,9 +9,12 @@ dev-repo: "https://github.com/whitequark/ppx_deriving.git"
 tags: [ "syntax" ]
 substs: [ "pkg/META" ]
 build: [
-  [# If there is no native dynlink, we can't use native builds
-   "ocaml" "pkg/build.ml" "native=%{ocaml-native-dynlink}%"
-                          "native-dynlink=%{ocaml-native-dynlink}%"]
+  [
+    "ocaml"
+    "pkg/build.ml"
+    "native=%{ocaml:native-dynlink}%"
+    "native-dynlink=%{ocaml:native-dynlink}%"
+  ]
   ["sh" "-c" "rm _build/src/ppx_deriving_runtime*"]
   ["env" "OCAMLFIND_TOOLCHAIN=windows"
    "ocamlbuild" "-classic-display" "-use-ocamlfind" "src/ppx_deriving_runtime.cmxs" "src/ppx_deriving_runtime.cma"]
