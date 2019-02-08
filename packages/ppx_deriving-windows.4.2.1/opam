@@ -26,6 +26,7 @@ build: [
   ] {with-doc}
 ]
 install: [["env" "OCAMLFIND_TOOLCHAIN=windows" make "install" "EXE="]]
+remove: [["env" "OCAMLFIND_TOOLCHAIN=windows" "ocamlfind" "remove" "ppx_deriving-windows"]]
 depends: [
   "ocamlbuild" {build}
   "ocamlfind"  {build & >= "1.6.0"}
