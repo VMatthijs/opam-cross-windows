@@ -18,13 +18,13 @@ build: [
   ["sh" "-c" "rm _build/src/ppx_deriving_runtime*"]
   ["env" "OCAMLFIND_TOOLCHAIN=windows"
    "ocamlbuild" "-classic-display" "-use-ocamlfind" "src/ppx_deriving_runtime.cmxs" "src/ppx_deriving_runtime.cma"]
+  [
+    "ocamlbuild" "-classic-display" "-use-ocamlfind" "src_test/test_ppx_deriving.byte" "--"
+  ] {with-test}
+  [
+    make "doc"
+  ] {with-doc}
 ]
-[
-  "ocamlbuild" "-classic-display" "-use-ocamlfind" "src_test/test_ppx_deriving.byte" "--"
-] {with-test}
-[
-  make "doc"
-] {with-doc}
 install: [["env" "OCAMLFIND_TOOLCHAIN=windows" make "install" "EXE="]]
 depends: [
   "ocamlbuild" {build}
